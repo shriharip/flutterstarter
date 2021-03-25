@@ -2,6 +2,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:fl_starter/providers/graph_providers.dart';
 import 'package:fl_starter/theme.dart';
 import 'package:fl_starter/providers/core_providers.dart';
 import 'package:fl_starter/utils/format_utils.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations_en.dart';
+import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:fl_starter/utils/extension_methods.dart';
@@ -48,7 +50,7 @@ void main() => throw Exception('Run either development/production .dart file');
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
      return MaterialApp(
       title: 'Flutter Demo',
       theme: myTheme,
@@ -64,7 +66,11 @@ class MyApp extends StatelessWidget {
   ],
       routes: {
         '/' : (context) => MyHomePage(title: 'Flutter Demo Home Page'),
-        'two': (context) => SecondPage()
+        'two': (context) => GraphQLProvider(
+              client: client,
+              child: SecondPage(),
+            )
+
       },
     );
   }
